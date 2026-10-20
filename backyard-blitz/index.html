@@ -76,34 +76,27 @@ body { background: var(--ink); color: var(--chalk); font-family: var(--f-ui); fo
 .btn:active { transform: translateY(2px); }
 button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
 
-/* Play-call sheet */
-.sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 58%; overflow-y: auto; background: linear-gradient(to top, var(--ink) 0%, var(--scrim) 78%, rgba(10,16,22,0) 100%); padding-block: 44px calc(env(safe-area-inset-bottom, 0px) + 14px); z-index: 6; }
-.sheet-in { max-width: 1060px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
-.sheet-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.sheet-head h2 { margin: 0; font-family: var(--f-display); font-size: 24px; font-weight: 400; letter-spacing: .02em; }
-.situ { font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-.card-wrap { position: relative; min-width: 0; }
-.card { width: 100%; display: flex; flex-direction: column; gap: 4px; text-align: left; background: var(--board); border: 2px solid var(--line); border-radius: 8px; padding: 7px; color: var(--chalk); cursor: pointer; font-family: var(--f-ui); transition: border-color .12s, transform .12s; }
-.card:hover { border-color: var(--bulb); transform: translateY(-2px); }
-.card canvas { width: 100%; aspect-ratio: 3 / 2; border-radius: 4px; display: block; }
-.card b { font-size: 18px; letter-spacing: .03em; font-weight: 700; line-height: 1.1; }
-.card span { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.card.draw { border-style: dashed; border-color: var(--bulb); }
-.card.draw .sketch { aspect-ratio: 3 / 2; border-radius: 4px; display: grid; place-items: center; background: repeating-linear-gradient(0deg, #2f6e27 0 14px, #34762b 14px 28px); }
-.card-del { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink); color: var(--chalk); cursor: pointer; font-size: 15px; line-height: 1; }
-@media (max-width: 560px) {
-  .cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
-  .card-wrap { flex: 0 0 138px; scroll-snap-align: start; }
-}
+/* HUD pills */
+.pills { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.pill { background: var(--scrim); border: 1px solid var(--line); border-radius: 99px; padding: 1px 10px; font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.pill.on { color: var(--bulb); border-color: var(--bulb-deep); }
+.pill.hot { color: var(--chalk); background: var(--red); border-color: var(--red); }
+.pill:empty { display: none; }
 
 /* Route drawing */
-.draw-tip { position: absolute; left: 0; right: 0; top: calc(env(safe-area-inset-top, 0px) + 104px); text-align: center; margin: 0; font-weight: 700; letter-spacing: .05em; font-size: 16px; text-shadow: 0 1px 3px var(--ink); pointer-events: none; z-index: 5; }
+.draw-tip { position: absolute; left: 0; right: 0; top: calc(env(safe-area-inset-top, 0px) + 132px); text-align: center; margin: 0; font-weight: 700; letter-spacing: .05em; font-size: 16px; text-shadow: 0 1px 3px var(--ink); pointer-events: none; z-index: 5; }
 .drawbar { position: absolute; left: 0; right: 0; bottom: 0; padding-block: 28px calc(env(safe-area-inset-bottom, 0px) + 14px); background: linear-gradient(to top, var(--scrim), rgba(10,16,22,0)); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 6; }
 .chips, .draw-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .chip { font-family: var(--f-ui); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 14px; padding: 6px 12px; border-radius: 99px; border: 2px solid var(--line); background: var(--board); color: var(--chalk); cursor: pointer; }
 .chip[aria-pressed="true"] { border-color: var(--bulb); color: var(--bulb); }
-.snapbar { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 44px); display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; z-index: 6; }
+.saved { display: inline-flex; align-items: stretch; border: 2px solid var(--bulb-deep); border-radius: 99px; overflow: hidden; background: var(--board); }
+.saved button { font-family: var(--f-ui); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 14px; color: var(--bulb); background: none; border: 0; padding: 5px 10px; cursor: pointer; }
+.saved button + button { color: var(--muted); border-left: 1px solid var(--line); padding: 5px 9px; }
+.snapbar { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 40px); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 6; }
+.snap-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.huddle { margin: 0; font-weight: 700; font-size: 16px; letter-spacing: .06em; text-transform: uppercase; text-shadow: 0 1px 3px var(--ink); text-align: center; text-wrap: balance; }
+.huddle b { color: var(--bulb); }
+.btn:disabled { opacity: .45; cursor: default; }
 
 /* Modals */
 #modal { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 9, 13, .6); z-index: 10; padding-block: 16px; }
@@ -119,8 +112,10 @@ button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
 .controls dt { font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 14px; color: var(--bulb); padding-top: 2px; }
 .controls dd { margin: 0; color: var(--chalk); }
 .drive { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.drive li { display: grid; grid-template-columns: 74px 1fr; gap: 10px; font-size: 17px; line-height: 1.3; animation: rise .35s both; animation-delay: calc(var(--i) * .22s); }
+.drive li { display: grid; grid-template-columns: 74px 1fr auto; gap: 10px; font-size: 17px; line-height: 1.3; animation: rise .35s both; animation-delay: calc(var(--i) * .22s); }
 .drive li .at { font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.drive li .secs { display: flex; flex-direction: column; align-items: flex-end; font-weight: 700; font-size: 14px; color: var(--chalk); padding-top: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.drive li .secs small { font-size: 12px; font-weight: 600; color: var(--muted); }
 .drive li.td { color: var(--red); font-weight: 700; }
 .drive li.stop { color: var(--bulb); font-weight: 700; }
 .final { display: flex; justify-content: center; gap: 16px; align-items: center; font-family: var(--f-display); font-size: 40px; }
@@ -128,7 +123,7 @@ button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
 .final .r { color: var(--red); }
 .final .dash { color: var(--muted); font-size: 24px; }
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .drive li { animation: none; } #banner { transition: none; } .card { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .drive li { animation: none; } #banner { transition: none; } }
 
 #toast { position: absolute; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 150px); transform: translateX(-50%); background: var(--chalk); color: var(--ink); font-weight: 700; letter-spacing: .06em; padding: 8px 14px; border-radius: 6px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 12; white-space: nowrap; }
 #toast.on { opacity: 1; }
@@ -145,6 +140,7 @@ button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
       <div class="team red"><span class="tname">Red</span><span class="pts" id="sRed">0</span></div>
     </div>
     <div class="strip" id="downs">1st &amp; 10 · Own 10</div>
+    <div class="pills"><span class="pill" id="pDraw"></span><span class="pill" id="pRush"></span></div>
   </div>
 
   <div id="banner" aria-live="polite"><div class="big"></div><div class="small"></div></div>
@@ -153,16 +149,10 @@ button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
   <div id="hint" class="gutter"></div>
   <button id="juke" hidden>JUKE<small>SPACE</small></button>
 
-  <section id="playcall" class="sheet" hidden>
-    <div class="sheet-in gutter">
-      <header class="sheet-head"><h2>Call a play</h2><span class="situ" id="pcSitu"></span></header>
-      <div class="cards" id="cards"></div>
-    </div>
-  </section>
-
   <div id="drawbar" hidden>
-    <p class="draw-tip gutter">Drag from a receiver to draw a route. Receivers stop where the line ends.</p>
+    <p class="draw-tip gutter">Drag from a receiver to draw a route, or load one from your playbook. Receivers stop where the line ends.</p>
     <div class="drawbar gutter">
+      <div class="chips" id="savedChips"></div>
       <div class="chips" id="formChips"></div>
       <div class="draw-actions">
         <button class="btn" id="dBack">Back</button>
@@ -174,8 +164,12 @@ button:focus-visible { outline: 3px solid var(--chalk); outline-offset: 2px; }
   </div>
 
   <div id="snapbar" class="snapbar gutter" hidden>
-    <button class="btn" id="btnChange">Change play</button>
-    <button class="btn hike" id="btnHike">HIKE</button>
+    <p class="huddle" id="huddle"></p>
+    <div class="snap-actions">
+      <button class="btn" id="btnDraw">Draw a play</button>
+      <button class="btn" id="btnPunt" hidden>Punt</button>
+      <button class="btn hike" id="btnHike">HIKE</button>
+    </div>
   </div>
 
   <div id="modal" class="gutter" hidden><div class="mcard" id="mcard" role="dialog" aria-modal="true"></div></div>
@@ -202,38 +196,40 @@ const isTouch = matchMedia('(pointer: coarse)').matches;
 // Playable field z 0..60, Blue's end zone -10..0, Red's end zone 60..70, sidelines at x = ±16.
 const HALF_W = 16, FIELD_LEN = 60, EZ = 10, QUARTER_LEN = 240, COUNT_SECS = 3;
 const ROUTE_COLORS = ['#ffcf3a', '#3fe0cf', '#ff7ad1'];
-const SPEED = { wr: 7.2, qb: 5.8, scramble: 6.3, rush: 6.6 };
+const SPEED = { wr: 7.2, qb: 5.6, scramble: 6.4, rush: 7.0 }; // the QB is still the slowest player on the field
+const MIDFIELD = 30; // backyard rule: the only first down is at midfield
 
 // Play space (used by the playbook and route drawing): x = screen right, y = yards past the line of scrimmage.
 const ps2w = (x, y, los) => V(-x, 0, los + y);
 
 // ---------- playbook
+// Real plays, called at random every snap. You don't get told which one it is: read it after the snap.
 const PLAYBOOK = [
-  { name: 'Slants', tag: 'Quick', recv: [
+  { name: 'Slants', recv: [
     { start: [-12, 0], path: [[-12, 3], [-5, 9]], end: 'go' },
     { start: [5, 0], path: [[5, 14]], end: 'go' },
     { start: [12, 0], path: [[12, 3], [5, 9]], end: 'go' } ] },
-  { name: 'Curl Flat', tag: 'Short', recv: [
+  { name: 'Curl Flat', recv: [
     { start: [-12, 0], path: [[-12, 10], [-11, 8]], end: 'settle' },
     { start: [-5, 0], path: [[-6, 2], [-14, 3]], end: 'settle' },
     { start: [12, 0], path: [[12, 10], [2, 11]], end: 'go' } ] },
-  { name: 'Mesh', tag: 'Crossers', recv: [
+  { name: 'Mesh', recv: [
     { start: [-12, 0], path: [[-11, 3], [10, 4]], end: 'go' },
     { start: [12, 0], path: [[11, 2], [-10, 3]], end: 'go' },
     { start: [5, 0], path: [[5, 10], [13, 18]], end: 'go' } ] },
-  { name: 'Comebacks', tag: 'Intermediate', recv: [
+  { name: 'Comebacks', recv: [
     { start: [-12, 0], path: [[-12, 14], [-14, 11]], end: 'settle' },
     { start: [-4, 0], path: [[-4, 3], [12, 5]], end: 'go' },
     { start: [12, 0], path: [[12, 14], [14, 11]], end: 'settle' } ] },
-  { name: 'Post Corner', tag: 'Deep', recv: [
+  { name: 'Post Corner', recv: [
     { start: [-12, 0], path: [[-12, 12], [-4, 22]], end: 'go' },
     { start: [5, 0], path: [[5, 6], [13, 6]], end: 'settle' },
     { start: [12, 0], path: [[12, 10], [15, 17]], end: 'go' } ] },
-  { name: 'Verticals', tag: 'Deep', recv: [
+  { name: 'Verticals', recv: [
     { start: [-12, 0], path: [[-12, 8]], end: 'go' },
     { start: [-5, 0], path: [[-4, 8]], end: 'go' },
     { start: [12, 0], path: [[12, 8]], end: 'go' } ] },
-  { name: 'Bomb', tag: 'Shot play', recv: [
+  { name: 'Bomb', recv: [
     { start: [-12, 0], path: [[-12, 8], [-3, 20]], end: 'go' },
     { start: [12, 0], path: [[12, 6]], end: 'go' },
     { start: [3, -3], path: [[9, -2], [14, 2]], end: 'go' } ] },
@@ -244,11 +240,28 @@ const FORMATIONS = {
   bunch: { label: 'Bunch', starts: [[-9, 0], [-7, -1.3], [-11, -1.3]] },
   back: { label: 'Backfield', starts: [[-12, 0], [12, 0], [3, -3]] },
 };
+let lastPlay = null;
+function randomPlay() {
+  const pool = PLAYBOOK.filter((p) => p !== lastPlay);
+  return (lastPlay = pick(pool));
+}
 
+// ---------- saved playbook (kept in this browser)
 const STORE_KEY = 'backyard-blitz-plays';
 function loadCustom() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
 function saveCustom() { try { localStorage.setItem(STORE_KEY, JSON.stringify(customPlays)); } catch { /* storage unavailable */ } }
-let customPlays = loadCustom();
+// Plays saved by the earlier playbook version stored full receiver lists; convert them by matching the formation
+const fromOld = (c) => {
+  if (!c || !Array.isArray(c.recv)) return c;
+  const formation = Object.keys(FORMATIONS).find((k) => FORMATIONS[k].starts.every((s, i) => c.recv[i] && c.recv[i].start[0] === s[0] && c.recv[i].start[1] === s[1]));
+  return formation ? { name: c.name, formation, paths: c.recv.map((r) => r.path) } : null;
+};
+let customPlays = loadCustom().map(fromOld).filter((c) => c && FORMATIONS[c.formation] && Array.isArray(c.paths));
+
+// ---------- receiver levels (per game)
+// Hidden from the player on purpose: catches heat a receiver up (faster, and he catches fire),
+// and a drop or an incompletion near him puts the fire out.
+const LEVEL_SPEED = 0.25, MAX_LEVEL = 5, CATCHES_PER_LEVEL = 2, COLD_RADIUS = 4.5, THROW_CLOCK = 5;
 
 // ---------- renderer / scene
 const canvas = $('c');
@@ -430,13 +443,84 @@ const offense = [qb, ...receivers];
 const defense = [rusher, ...covers];
 const everyone = [...offense, ...defense];
 
-// ---------- game state
-const G = { phase: 'loading', score: { blue: 0, red: 0 }, quarter: 1, clock: QUARTER_LEN, down: 1, los: 10, fdLine: 20, pat: null, note: '' };
-let P = null; // the current play
-let currentDef = PLAYBOOK[0];
+// ---------- receiver fire
+// A hot receiver catches fire: glowing embers rise off him, more and hotter the longer his streak.
+const FIRE_N = 56;
+const fireTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.35, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(c);
+})();
+const fires = receivers.map(() => {
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(FIRE_N * 3), col = new Float32Array(FIRE_N * 4);
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 4)); // RGBA: each ember fades out on its own
+  const pts = new THREE.Points(geo, new THREE.PointsMaterial({ size: 0.6, map: fireTex, vertexColors: true, transparent: true, depthWrite: false }));
+  pts.frustumCulled = false; scene.add(pts);
+  return { pts, pos, col, vel: new Float32Array(FIRE_N * 3), life: new Float32Array(FIRE_N), max: new Float32Array(FIRE_N).fill(1), flare: 0 };
+});
+// New lineup: put out the old embers so no fire is left burning where a receiver used to be
+function resetFire() { fires.forEach((f) => { f.life.fill(0); for (let k = 0; k < FIRE_N; k++) f.col[k * 4 + 3] = 0; }); }
+function updateFire(dt) {
+  receivers.forEach((r, i) => {
+    const f = fires[i], lvl = G.wr[i].lvl, heat = lvl / MAX_LEVEL;
+    f.flare = Math.max(0, f.flare - dt);
+    const active = lvl > 0 ? Math.round(FIRE_N * (f.flare > 0 ? 1 : 0.45 + 0.55 * heat)) : 0;
+    const boost = f.flare > 0 ? 1.6 : 1;
+    f.pts.material.size = 0.75 + 0.6 * heat;
+    for (let k = 0; k < FIRE_N; k++) {
+      const j = k * 3;
+      if (f.life[k] <= 0) {
+        if (k >= active) { f.col[k * 4 + 3] = 0; continue; }
+        const a = rand(0, Math.PI * 2), rad = rand(0.1, 0.45);
+        f.pos[j] = r.pos.x + Math.cos(a) * rad; f.pos[j + 1] = rand(0.2, 1.7); f.pos[j + 2] = r.pos.z + Math.sin(a) * rad;
+        // embers carry most of the runner's speed, so the flames wrap him with only a short trail
+        f.vel[j] = r.vel.x * 0.75 + rand(-0.4, 0.4); f.vel[j + 1] = rand(1.2, 2.4) * (1 + heat * 0.6) * boost; f.vel[j + 2] = r.vel.z * 0.75 + rand(-0.4, 0.4);
+        f.max[k] = f.life[k] = rand(0.3, 0.7) * (0.8 + heat * 0.6);
+      }
+      f.life[k] -= dt;
+      f.pos[j] += f.vel[j] * dt; f.pos[j + 1] += f.vel[j + 1] * dt; f.pos[j + 2] += f.vel[j + 2] * dt;
+      // young embers burn yellow, old ones cool through orange to red as they fade
+      const t = Math.max(0, f.life[k] / f.max[k]), c = k * 4;
+      f.col[c] = 1; f.col[c + 1] = 0.2 + 0.7 * t; f.col[c + 2] = 0.05 + 0.4 * t * heat; f.col[c + 3] = Math.min(1, t * 1.4) * (0.65 + 0.35 * heat);
+    }
+    f.pts.geometry.attributes.position.needsUpdate = true;
+    f.pts.geometry.attributes.color.needsUpdate = true;
+  });
+}
 
-function setBlueBall(z) { G.los = clamp(z, 1, 59); G.down = 1; G.fdLine = Math.min(FIELD_LEN, G.los + 10); }
-function resetGame() { G.score = { blue: 0, red: 0 }; G.quarter = 1; G.clock = QUARTER_LEN; G.pat = null; G.twoMin = false; G.carry = 0; setBlueBall(10); updateHUD(); }
+// ---------- game state
+const freshLevels = () => receivers.map(() => ({ lvl: 0, prog: 0 }));
+const G = { phase: 'loading', score: { blue: 0, red: 0 }, quarter: 1, clock: QUARTER_LEN, down: 1, los: 10, fdLine: 20, pat: null, note: '',
+            drive: { drawUsed: false, rushUsed: false }, play: null, rushPlay: false, wr: freshLevels() };
+let P = null; // the current play
+
+// Every new Blue drive gets one drawn play, and Red gets one rush against it
+function setBlueBall(z) { G.los = clamp(z, 1, 59); G.down = 1; G.fdLine = G.los < MIDFIELD ? MIDFIELD : FIELD_LEN; G.drive = { drawUsed: false, rushUsed: false }; }
+function resetGame() { G.score = { blue: 0, red: 0 }; G.quarter = 1; G.clock = QUARTER_LEN; G.pat = null; G.twoMin = false; G.carry = 0; G.wr = freshLevels(); setBlueBall(10); updateHUD(); }
+
+// Red saves its one rush for the downs that matter most
+function decideRush() {
+  if (G.drive.rushUsed) return false;
+  const p = G.pat ? 0.5 : G.down === 4 ? 0.65 : G.down === 3 ? 0.4 : 0.18;
+  return Math.random() < p;
+}
+const wrSpeed = (i) => SPEED.wr + LEVEL_SPEED * G.wr[i].lvl;
+function wrCaught(r) {
+  const i = receivers.indexOf(r), w = G.wr[i];
+  if (i < 0 || w.lvl >= MAX_LEVEL) return;
+  if (++w.prog >= CATCHES_PER_LEVEL) { w.lvl++; w.prog = 0; r.speed = wrSpeed(i); fires[i].flare = 0.7; }
+}
+function wrCold(pos) {
+  receivers.forEach((r, i) => {
+    const w = G.wr[i];
+    if (hyp(r.pos, pos) > COLD_RADIUS) return;
+    w.lvl = 0; w.prog = 0; r.speed = wrSpeed(i);
+  });
+}
 
 // ---------- routes on the ground
 function ribbonGeo(pts, w, y = 0.05) {
@@ -488,31 +572,39 @@ function setRouteOpacity(o) { routeGroup?.traverse((m) => { if (m.isMesh) m.mate
 // ---------- line up
 function lineUp(def) {
   const los = G.los;
-  currentDef = def;
-  P = { def, t: 0, rushing: false, countShown: 0, ball: 'qb', holder: qb, carrier: null, flight: null, over: false,
+  resetFire();
+  P = { def, t: 0, rushPlay: G.rushPlay, rushing: false, countDone: false, countShown: 0, ball: 'qb', holder: qb, carrier: null, flight: null, over: false,
         juke: 0, jukeDir: 1, jukeCd: 0, intended: null, throwAnim: 0, deadT: 0, resolving: false, result: null, blockTaken: new Set() };
-  everyone.forEach((e) => { e.vel.set(0, 0, 0); e.stun = 0; e.blocked = 0; e.blockBudget = 1.2; e.fall = 0; e.falling = false; e.faceTo = null; e.armOverride = null; e.slow = 0; e.triedBreak = false; e.react = null; e.mesh.group.visible = true; });
+  everyone.forEach((e) => { e.vel.set(0, 0, 0); e.stun = 0; e.blocked = 0; e.blockBudget = 1.2; e.fall = 0; e.falling = false; e.faceTo = null; e.armOverride = null; e.slow = 0; e.triedBreak = false; e.react = null; e.ezSpot = null; e.mesh.group.visible = true; });
   qb.pos.set(0, 0, los - 4); qb.facing = 0;
   def.recv.forEach((rd, i) => {
     const r = receivers[i];
     const s = ps2w(rd.start[0], rd.start[1], los);
-    r.pos.copy(s); r.facing = 0; r.speed = SPEED.wr; r.agility = 10;
+    r.pos.copy(s); r.facing = 0; r.speed = wrSpeed(i); r.agility = 10;
     r.route = rd.path.map((p) => { const w = ps2w(clamp(p[0], -15.5, 15.5), p[1], los); w.z = Math.min(w.z, FIELD_LEN + EZ - 0.5); return w; });
     r.ri = 0; r.settle = rd.end === 'settle';
     const all = [s, ...r.route]; const a = all[all.length - 2] || s, b = all[all.length - 1];
     r.dir = b.clone().sub(a); if (r.dir.lengthSq() < 1e-4) r.dir.set(0, 0, 1); r.dir.normalize();
   });
   P.look = Math.random() < 0.55 ? 'man' : 'zone';
-  rusher.pos.set(0, 0, los + 1.5); rusher.home = rusher.pos.clone(); rusher.facing = Math.PI; rusher.speed = SPEED.rush; rusher.agility = 6;
   const deepMax = FIELD_LEN + EZ - 1 - los;
-  const anchors = [[-8, 15], [8, 15], [0, 6]];
+  rusher.facing = Math.PI; rusher.man = null;
+  if (P.rushPlay) {
+    rusher.pos.set(0, 0, los + 1.5); rusher.home = rusher.pos.clone(); rusher.speed = SPEED.rush; rusher.agility = 6; rusher.zone = null;
+  } else {
+    // No rush this snap: the fourth man sits deep in the middle as a safety
+    rusher.zone = 'deep'; rusher.zoneR = 18; rusher.speed = 7.3; rusher.agility = 4.5;
+    rusher.anchor = ps2w(0, Math.min(16, deepMax), los); rusher.pos.copy(rusher.anchor);
+  }
+  // With a rusher, zone is two deep and one under; with a safety over the top, all three sit underneath
+  const anchors = P.rushPlay ? [[-8, 15, 'deep'], [8, 15, 'deep'], [0, 6, 'under']] : [[-8, 6, 'under'], [8, 6, 'under'], [0, 9, 'under']];
   covers.forEach((d, i) => {
-    d.speed = rand(6.5, 7.05); d.agility = rand(3.0, 4.6); d.facing = Math.PI;
+    d.speed = rand(6.9, 7.4); d.agility = rand(3.4, 5.0); d.facing = Math.PI;
     if (P.look === 'man') {
       const r = receivers[i]; d.man = r; d.zone = null;
       d.pos.set(r.pos.x + (r.pos.x > 0 ? -0.8 : 0.8), 0, Math.min(los + deepMax, r.pos.z + rand(3.5, 6)));
     } else {
-      d.man = null; d.zone = i < 2 ? 'deep' : 'under';
+      d.man = null; d.zone = anchors[i][2]; d.zoneR = 13;
       d.anchor = ps2w(anchors[i][0], Math.min(anchors[i][1], deepMax), los);
       d.pos.copy(d.anchor);
     }
@@ -557,6 +649,8 @@ const touchSteer = { id: null, x: 0 };
 function hike() {
   if (G.phase !== 'presnap') return;
   G.phase = 'live';
+  if (P.rushPlay) G.drive.rushUsed = true;
+  updateHUD();
   $('snapbar').hidden = true;
   setRouteOpacity(0.28);
   setHint(isTouch ? 'Pull back anywhere to aim · release to throw' : 'Click and pull back to aim · release to throw · <kbd>WASD</kbd> moves the QB');
@@ -564,17 +658,27 @@ function hike() {
 
 function updateLive(dt) {
   P.t += dt;
-  if (!P.rushing) {
-    const n = Math.floor(P.t) + 1;
-    if (P.t >= COUNT_SECS) { P.rushing = true; setCount('Rush!', true); }
-    else if (n !== P.countShown) { P.countShown = n; setCount(`${['One', 'Two', 'Three'][n - 1]} Mississippi`); }
-  } else if (P.t > COUNT_SECS + 1.2) setCount('');
+  // Rush play: three Mississippi, then the rusher comes. Otherwise the QB has five Mississippi to get rid of it.
+  if (!P.countDone) {
+    const limit = P.rushPlay ? COUNT_SECS : THROW_CLOCK, n = Math.floor(P.t) + 1;
+    if (!P.rushPlay && P.ball !== 'qb') { P.countDone = true; setCount(''); }
+    else if (P.t >= limit) {
+      P.countDone = true;
+      if (P.rushPlay) { P.rushing = true; setCount('Rush!', true); }
+      else return endPlay('slow', G.los, 'Too slow!', 'Five Mississippi · loss of down');
+    } else if (n !== P.countShown) { P.countShown = n; setCount(`${['One', 'Two', 'Three', 'Four', 'Five'][n - 1]} Mississippi`, !P.rushPlay && n >= 4); }
+  } else if (P.rushing && P.t > COUNT_SECS + 1.2) setCount('');
   P.jukeCd = Math.max(0, P.jukeCd - dt);
 
   if (P.ball === 'qb') {
     const inp = moveInput();
     steerVel(qb, inp.x * SPEED.qb, inp.z * SPEED.qb, 10, dt);
     integrate(qb, dt); keepIn(qb);
+    // Backyard rule: the QB can't cross the line until the rusher is actually coming
+    if (!P.rushing && qb.pos.z > G.los - 0.5) {
+      qb.pos.z = G.los - 0.5; qb.vel.z = Math.min(0, qb.vel.z);
+      if (!P.runNoted) { P.runNoted = true; flashNote('No QB runs until you get rushed'); }
+    }
     if (qb.pos.z > G.los + 0.25) {
       cancelAim(); P.ball = 'carried'; P.carrier = qb; showRunUI();
       flashNote('Scramble!');
@@ -593,11 +697,21 @@ function controlCarrier(dt) {
   const c = P.carrier, inp = moveInput();
   let dx = inp.x, dz = inp.z;
   if (touchSteer.id !== null) { const t = Math.abs(touchSteer.x) < 0.12 ? 0 : touchSteer.x; dx = -t * 1.4; dz = 1; }
+  // Track cuts: any fresh press or switch of left/right steering. A juke only fools defenders
+  // when it lands on a cut (just before, or within a beat after, pressing juke).
+  const lat = Math.sign(dx);
+  if (lat && lat !== P.prevLat) {
+    P.cutT = P.t;
+    if (P.jukePending > 0) { P.jukePending = 0; P.jukeDir = lat; fakeOut(c); }
+  }
+  P.prevLat = lat;
+  P.jukePending = Math.max(0, (P.jukePending || 0) - dt);
   if (!dx && !dz) dz = 1;
   const L = Math.hypot(dx, dz); dx /= L; dz /= L;
-  const sp = (c === qb ? SPEED.scramble : SPEED.wr) * (c.slow > 0 ? 0.55 : 1);
+  const sp = (c === qb ? SPEED.scramble : c.speed) * (c.slow > 0 ? 0.55 : 1);
   steerVel(c, dx * sp, dz * sp, 9, dt);
-  if (P.juke > 0) { P.juke -= dt; c.vel.x = P.jukeDir * 8.5; }
+  // A juke is a sideways cut: quick lateral burst, but the runner plants and gives up forward speed
+  if (P.juke > 0) { P.juke -= dt; c.vel.x = P.jukeDir * 8.5; c.vel.z = clamp(c.vel.z, -1, 1.5); }
   integrate(c, dt); keepIn(c, true);
   c.slow = Math.max(0, c.slow - dt);
 }
@@ -611,17 +725,37 @@ function juke() {
     dir = near && near.pos.x > c.pos.x ? -1 : 1;
   }
   P.juke = 0.24; P.jukeDir = dir; P.jukeCd = 2.2;
-  defense.forEach((d) => { if (hyp(d.pos, c.pos) < 3.4 && Math.random() < 0.8) d.stun = 0.6; });
+  // Sold with a change of direction, it shakes nearby defenders; otherwise it's just a sidestep
+  if (P.t - (P.cutT ?? -9) < 0.25) fakeOut(c); else P.jukePending = 0.25;
   $('juke').classList.add('cool');
   setTimeout(() => $('juke').classList.remove('cool'), 2200);
 }
 
+function fakeOut(c) { defense.forEach((d) => { if (hyp(d.pos, c.pos) < 3.4 && Math.random() < 0.8) d.stun = 0.6; }); }
+
 function updateReceiver(r, dt) {
   if (G.phase !== 'live') { steerVel(r, 0, 0, 4, dt); integrate(r, dt); return; }
-  if (P.ball === 'air' && r === P.intended && P.flight) {
-    steer(r, P.flight.e.x, P.flight.e.z, r.speed, dt, true); integrate(r, dt); keepIn(r); return;
+  if (P.ball === 'air' && P.flight) {
+    // Work back to the ball: the target goes to the landing spot, and anyone near it who has run past
+    // an underthrown ball turns around and comes back for it, eyes on the ball.
+    const e = P.flight.e, dx = e.x - r.pos.x, dz = e.z - r.pos.z, d = Math.hypot(dx, dz);
+    const behind = dx * r.vel.x + dz * r.vel.z < 0;
+    const reach = (P.flight.T - P.flight.t) * r.speed + 2.5;
+    if (behind && d < 7 && d < reach) r.comeback = P.flight; // once he turns back, he stays on the ball
+    if (r === P.intended || r.comeback === P.flight) {
+      steer(r, e.x, e.z, r.speed, dt, true);
+      r.faceTo = d < 3 || behind ? Math.atan2(ball.position.x - r.pos.x, ball.position.z - r.pos.z) : null;
+      integrate(r, dt); keepIn(r); return;
+    }
   }
   if (P.ball === 'carried') { blockFor(r, dt); integrate(r, dt); keepIn(r); return; }
+  // Out of room at the back of the end zone: turn around and drift through the end zone looking for space
+  if (r.ezSpot || r.pos.z > FIELD_LEN + EZ - 2.5) {
+    if (!r.ezSpot || hyp(r.pos, r.ezSpot) < 0.8) r.ezSpot = V(clamp(r.pos.x + rand(-6, 6), -14, 14), 0, rand(FIELD_LEN + 2, FIELD_LEN + EZ - 3.5));
+    steer(r, r.ezSpot.x, r.ezSpot.z, r.speed * 0.55, dt, true);
+    r.faceTo = Math.hypot(r.vel.x, r.vel.z) < 1.5 ? Math.atan2(qb.pos.x - r.pos.x, qb.pos.z - r.pos.z) : null;
+    integrate(r, dt); keepIn(r); return;
+  }
   const ramp = Math.min(1, 0.55 + P.t * 0.9);
   if (r.ri < r.route.length) {
     const p = r.route[r.ri];
@@ -656,8 +790,10 @@ function updateDefender(d, dt) {
   if (d.stun > 0) { d.stun -= dt; steerVel(d, 0, 0, 5, dt); integrate(d, dt); return; }
   const sp = d.speed * (d.blocked > 0 ? 0.3 : 1);
   d.blocked = Math.max(0, d.blocked - dt);
-  if (P.ball === 'carried') pursue(d, P.carrier, sp, dt);
-  else if (d === rusher) {
+  // Chasing a runner, defenders find another gear (about 7.6 to 8.1): enough to run down a normal
+  // receiver from behind, while a receiver on fire (up to 8.45) can still pull away
+  if (P.ball === 'carried') pursue(d, P.carrier, sp * 1.1, dt);
+  else if (d === rusher && P.rushPlay) {
     if (!P.rushing) steer(d, d.home.x, d.home.z, 3, dt, true);
     else if (P.ball === 'qb') pursue(d, qb, sp, dt);
     else if (P.ball === 'air' && d.react != null && P.t >= d.react && P.flight) steer(d, P.flight.e.x, P.flight.e.z, sp, dt, true);
@@ -674,7 +810,7 @@ function updateDefender(d, dt) {
 function zoneCover(d, sp, dt) {
   const a = d.anchor; let best = null, score = -1e9;
   receivers.forEach((r) => {
-    const k = hyp(r.pos, a); if (k > 13) return;
+    const k = hyp(r.pos, a); if (k > (d.zoneR || 13)) return;
     const s = d.zone === 'deep' ? r.pos.z - k * 0.3 : -k;
     if (s > score) { score = s; best = r; }
   });
@@ -747,7 +883,7 @@ function updateBall(dt) {
     ball.lookAt(pos.clone().add(dv)); f.spin += dt * 22; ball.rotateZ(f.spin);
     if (f.thrown && G.phase === 'live') { tryCatch(pos, u); if (P.flight !== f) return; }
     if (u >= 1) {
-      if (f.thrown) { P.flight = dropFlight(pos.clone()); if (G.phase === 'live') endPlay('inc', G.los, 'Incomplete'); }
+      if (f.thrown) { P.flight = dropFlight(pos.clone()); if (G.phase === 'live') { endPlay('inc', G.los, 'Incomplete'); wrCold(pos); } }
       else { P.flight = null; ball.position.y = 0.15; ball.rotation.set(0, rand(0, 6), Math.PI / 2); }
     }
     return;
@@ -775,21 +911,25 @@ function tryCatch(pos, u) {
   if (bdd < R && (brd >= R || bdd < brd - 0.2)) {
     if (Math.random() < 0.38) {
       P.flight = null; P.holder = bd;
-      return endPlay('int', bd.pos.z, 'Intercepted!', 'Red ball');
+      endPlay('int', bd.pos.z, 'Intercepted!', 'Red ball'); wrCold(pos); return;
     }
     P.flight = dropFlight(pos.clone());
-    return endPlay('inc', G.los, 'Broken up');
+    endPlay('inc', G.los, 'Broken up'); wrCold(pos); return;
   }
   const contested = defense.some((d) => d.stun <= 0 && hyp(d.pos, br.pos) < 1.8);
-  let p = contested ? 0.6 : 0.95; if (brd > 1.1) p -= 0.12;
+  // Short throws are easier to hang onto: full bonus at 5 yards or less, none past 15
+  const short = clamp((15 - hyp(P.flight.s, P.flight.e)) / 10, 0, 1);
+  let p = contested ? 0.6 + 0.25 * short : 0.95 + 0.04 * short;
+  if (brd > 1.1) p -= 0.12 * (1 - short * 0.5);
   if (Math.random() < p) {
-    if (br.pos.z > FIELD_LEN + EZ) { P.flight = dropFlight(pos.clone()); return endPlay('inc', G.los, 'Out the back'); }
+    if (br.pos.z > FIELD_LEN + EZ) { P.flight = dropFlight(pos.clone()); endPlay('inc', G.los, 'Out the back'); wrCold(pos); return; }
     P.flight = null; P.holder = br; P.carrier = br; P.ball = 'carried'; br.faceTo = null;
+    wrCaught(br);
     if (br.pos.z >= FIELD_LEN) return endPlay('td', FIELD_LEN, 'Touchdown!');
     showRunUI();
   } else {
     P.flight = dropFlight(pos.clone());
-    endPlay('inc', G.los, contested ? 'Knocked loose' : 'Dropped');
+    endPlay('inc', G.los, contested ? 'Knocked loose' : 'Dropped'); wrCold(pos);
   }
 }
 
@@ -797,18 +937,17 @@ function checkContacts() {
   if (P.ball === 'qb') {
     for (const d of defense) if (d.stun <= 0 && hyp(d.pos, qb.pos) < 0.95) {
       qb.falling = true; d.falling = true;
-      if (qb.pos.z < 0) return endPlay('safety', qb.pos.z, 'Safety', 'Red +2');
       return endPlay('sack', qb.pos.z, 'Sacked');
     }
   }
   if (P.ball === 'carried') {
     const c = P.carrier;
     if (Math.abs(c.pos.x) > HALF_W) return endPlay('oob', c.pos.z, 'Out of bounds');
-    if (c.pos.z >= FIELD_LEN) return endPlay('td', FIELD_LEN, 'Touchdown!');
+    // The ball crossing the goal line counts, not the runner's body
+    if (c.pos.z >= FIELD_LEN || (ball.position.z >= FIELD_LEN && Math.abs(ball.position.x) <= HALF_W)) return endPlay('td', FIELD_LEN, 'Touchdown!');
     for (const d of defense) if (d.stun <= 0 && hyp(d.pos, c.pos) < 0.95) {
       if (!d.triedBreak && Math.random() < 0.14) { d.triedBreak = true; d.stun = 0.9; c.slow = 0.35; flashNote('Broken tackle!'); continue; }
       c.falling = true; d.falling = true;
-      if (c.pos.z < 0) return endPlay('safety', c.pos.z, 'Safety', 'Red +2');
       return endPlay('tackle', c.pos.z, 'Tackled');
     }
   }
@@ -817,14 +956,15 @@ function checkContacts() {
 function gainText(g) { const n = Math.round(g); return n > 0 ? `+${n} yds` : n < 0 ? `${n} yds` : 'No gain'; }
 function endPlay(type, spot, title, sub = '') {
   if (P.over) return;
-  P.over = true; P.result = { type, spot }; P.deadT = 2.0;
+  P.over = true; P.result = { type, spot, title }; P.deadT = 2.0;
+  P.ruled = !(type === 'tackle' || type === 'sack');
   G.phase = 'dead';
   cancelAim(); hideRunUI(); setCount(''); setHint('');
   if (!sub && (type === 'tackle' || type === 'oob' || type === 'sack')) sub = gainText(spot - G.los);
   let tone = '';
   if (G.pat) { if (type === 'td') { title = `${G.pat.pts}-point try is good!`; tone = 'gold'; } else sub = 'Try fails'; }
   else if (type === 'td') tone = 'gold';
-  else if (type === 'int' || type === 'safety' || type === 'sack') tone = 'bad';
+  else if (type === 'int' || type === 'safety' || type === 'sack' || type === 'slow') tone = 'bad';
   banner(title, sub, tone, 2000);
 }
 
@@ -833,7 +973,25 @@ function updateDead(dt) {
   everyone.forEach((e) => { if (e.stun > 0) e.stun -= dt; steerVel(e, 0, 0, e.falling ? 6 : 2.5, dt); integrate(e, dt); });
   updateBall(dt);
   P.deadT -= dt;
-  if (P.deadT <= 0 && !P.resolving) { P.resolving = true; resolvePlay(P.result); }
+  if (P.deadT <= 0 && !P.resolving && P.ruled) { P.resolving = true; resolvePlay(P.result); }
+}
+
+// A tackled runner is down where the ball ends up once he hits the ground: reaching the ball over
+// the goal line is a touchdown, and the ball landing behind his own goal line is a safety.
+function ruleSpot() {
+  if (G.phase !== 'dead' || !P || P.ruled || !P.holder || P.holder.fall < 1) return;
+  P.ruled = true;
+  const r = P.result, bz = ball.position.z;
+  if (bz >= FIELD_LEN && Math.abs(ball.position.x) <= HALF_W) {
+    r.type = 'td'; r.spot = FIELD_LEN;
+    banner(G.pat ? `${G.pat.pts}-point try is good!` : 'Touchdown!', 'Broke the plane', 'gold', 2000);
+  } else if (bz < 0) {
+    r.type = 'safety'; r.spot = bz;
+    banner('Safety', 'Red +2', 'bad', 2000);
+  } else {
+    r.spot = bz;
+    banner(r.title, G.pat ? 'Try fails' : gainText(bz - G.los), r.type === 'sack' ? 'bad' : '', 2000);
+  }
 }
 
 // ---------- game flow
@@ -858,9 +1016,15 @@ async function resolvePlay(r) {
   if (r.type === 'safety') { G.score.red += 2; updateHUD(); await changePossession(35, 'Safety. Blue free-kicks it away.'); return; }
   if (r.type === 'int') { await changePossession(r.spot >= FIELD_LEN ? 50 : clamp(r.spot, 1, 59), 'Blue threw an interception.'); return; }
   let note = '';
-  if (r.type !== 'inc') G.los = clamp(r.spot, 1, 59);
-  if (r.type !== 'inc' && G.los >= G.fdLine - 0.01) { G.down = 1; G.fdLine = Math.min(FIELD_LEN, G.los + 10); note = 'First down'; }
-  else if (G.down >= 4) { await changePossession(G.los, 'Blue turns it over on downs.'); return; }
+  const spotted = r.type !== 'inc' && r.type !== 'slow';
+  if (spotted) G.los = clamp(r.spot, 1, 59);
+  if (spotted && G.los >= G.fdLine - 0.01) { G.down = 1; G.fdLine = FIELD_LEN; note = 'Midfield · first down'; }
+  else if (G.down >= 4) {
+    // Give the turnover its own moment before Red's drive takes over the screen
+    banner('Turnover on downs', `Red takes over at the ${spotName(G.los)}`, 'bad', 2600);
+    await new Promise((res) => setTimeout(res, 2600));
+    await changePossession(G.los, 'Blue turns it over on downs.'); return;
+  }
   else G.down++;
   if (await checkQuarter()) return;
   toPlaycall(note);
@@ -937,7 +1101,9 @@ async function checkQuarter() {
 function spotName(z) { z = Math.round(z); return z === 30 ? 'Midfield' : z < 30 ? `Blue ${z}` : `Red ${FIELD_LEN - z}`; }
 function simulateRedDrive(dist) {
   dist = clamp(Math.round(dist), 1, 59);
-  const pTD = clamp(0.8 - (dist / 60) * 0.45, 0.3, 0.8);
+  // Red plays with more urgency the further behind it is: about +1.2% per point down, capped at +25%
+  const deficit = Math.max(0, G.score.blue - G.score.red);
+  const pTD = clamp(0.8 - (dist / 60) * 0.45 + Math.min(0.25, deficit * 0.012), 0.3, 0.92);
   const scores = Math.random() < pTD;
   const total = scores ? dist : Math.round(rand(0, Math.max(0, dist - 4)) * 0.55);
   const who = () => pick(['#11', '#84', '#3', '#22', '#7']);
@@ -959,7 +1125,7 @@ function simulateRedDrive(dist) {
     const two = Math.random() < 0.2, good = Math.random() < (two ? 0.45 : 0.9);
     points = 6 + (good ? (two ? 2 : 1) : 0);
     log.push({ at: 'End zone', text: `Touchdown Red. ${two ? '2-point try' : 'Extra point'} ${good ? 'good' : 'no good'}.`, tone: 'td', secs: 0 });
-    headline = 'Red scores'; summary = `${dist} yards in ${log.length - 1} plays.`; blueStart = 10;
+    headline = 'Red scores'; summary = `${dist} yards in ${log.length - 1} ${log.length === 2 ? 'play' : 'plays'}.`; blueStart = 10;
   } else {
     // Most stalled drives end in a punt or on downs; real giveaways are rare
     const k = Math.random();
@@ -982,30 +1148,41 @@ function simulateRedDrive(dist) {
   return { log, points, headline, summary, blueStart, time: log.reduce((s, l) => s + l.secs, 0) };
 }
 function redDriveHTML(d, lead = '') {
-  const items = d.log.map((l, i) => `<li class="${l.tone || ''}" style="--i:${i}"><span class="at">${l.at}</span><span>${l.text}</span></li>`).join('');
-  return `<div class="eyebrow red">Red possession</div><h2>${d.headline}</h2>${lead ? `<p>${lead}</p>` : ''}<ol class="drive">${items}</ol><p>${d.summary} Blue ${G.score.blue}, Red ${G.score.red}.</p>`;
+  // Each play shows the game clock at the snap and how much it ran off (including the run between snaps)
+  let q = G.quarter, c = G.clock;
+  const items = d.log.map((l, i) => {
+    const clock = `<span class="secs" title="Game clock at the snap"><span>Q${q} ${fmtClock(c)}</span>${l.secs ? `<small>−${l.secs}s</small>` : ''}</span>`;
+    c -= l.secs;
+    if (c < 0 && (q === 1 || q === 3)) { q++; c += QUARTER_LEN; } // the drive rolls into the next quarter
+    return `<li class="${l.tone || ''}" style="--i:${i}"><span class="at">${l.at}</span><span>${l.text}</span>${clock}</li>`;
+  }).join('');
+  return `<div class="eyebrow red">Red possession</div><h2>${d.headline}</h2>${lead ? `<p>${lead}</p>` : ''}<ol class="drive">${items}</ol><p>${d.summary} The drive took ${fmtClock(d.time)}. Blue ${G.score.blue}, Red ${G.score.red}.</p>`;
 }
 
 // ---------- phases & UI
+// Every snap starts in the huddle: random routes drawn in the dirt, unless you spend this drive's drawn play
 function toPlaycall(note = '') {
   note = [note, G.note].filter(Boolean).join(' · '); G.note = '';
-  G.phase = 'playcall';
-  lineUp(currentDef); clearRoutes();
-  hideAllBars(); renderCards();
-  $('playcall').hidden = false;
-  $('pcSitu').textContent = situText();
-  setHint('');
-  updateHUD();
+  G.play = randomPlay(); G.rushPlay = decideRush();
+  showSnap(G.play);
   if (note) banner(note, '', 'gold', 1500);
 }
-function selectPlay(def) {
+function showSnap(def) {
   hideAllBars();
   G.phase = 'presnap';
   lineUp(def);
+  // Random routes stay a surprise: you find out where everyone is going after the snap
+  if (!def.custom) clearRoutes();
   $('snapbar').hidden = false;
+  $('huddle').innerHTML = def.custom ? `Your play · <b>drawn in the dirt</b>` : `Huddle up · <b>everybody get open</b>`;
+  const draw = $('btnDraw');
+  draw.disabled = G.drive.drawUsed;
+  draw.textContent = G.drive.drawUsed ? 'Drawn play used' : 'Draw a play · 1 per drive';
+  $('btnPunt').hidden = !(G.down === 4 && !G.pat);
   setHint(isTouch ? '' : 'Press <kbd>Space</kbd> to hike');
+  updateHUD();
 }
-function hideAllBars() { ['playcall', 'drawbar', 'snapbar'].forEach((id) => { $(id).hidden = true; }); hideRunUI(); }
+function hideAllBars() { ['drawbar', 'snapbar'].forEach((id) => { $(id).hidden = true; }); hideRunUI(); }
 function showRunUI() {
   $('juke').hidden = false;
   setHint(isTouch ? 'Hold left or right of the runner to steer · tap JUKE' : '<kbd>WASD</kbd> / arrows to steer · <kbd>Space</kbd> to juke');
@@ -1028,6 +1205,12 @@ function updateHUD() {
   $('clk').textContent = fmtClock(G.clock - (running ? P.t : 0));
   const [a, b] = situText().split(' · ');
   $('downs').innerHTML = `<b>${a}</b> · ${b}`;
+  const pd = $('pDraw'), pr = $('pRush'), offense = !G.redBall && G.phase !== 'modal';
+  pd.textContent = offense ? (G.drive.drawUsed ? 'Draw used' : 'Draw · 1 left') : '';
+  pd.className = `pill ${G.drive.drawUsed ? '' : 'on'}`;
+  const rushing = G.phase === 'presnap' && G.rushPlay;
+  pr.textContent = offense ? (rushing ? 'Rusher up!' : G.drive.rushUsed ? 'Red rush used' : 'Red rush · 1 left') : '';
+  pr.className = `pill ${rushing ? 'hot' : ''}`;
 }
 
 let bannerTimer = 0;
@@ -1053,68 +1236,16 @@ function showModal(html, buttons) {
   });
 }
 
-// ---------- playbook cards
-function drawDiagram(cv, def) {
-  const dpr = Math.min(devicePixelRatio, 2), w = 180, h = 120;
-  cv.width = w * dpr; cv.height = h * dpr;
-  const g = cv.getContext('2d'); g.scale(dpr, dpr);
-  const sx = (x) => (x + 16) / 32 * w, sy = (y) => h - (y + 6) / 30 * h;
-  for (let i = 0; i < 6; i++) { g.fillStyle = i % 2 ? '#34762b' : '#2f6e27'; g.fillRect(0, i * h / 6, w, h / 6); }
-  g.strokeStyle = 'rgba(255,255,255,.55)'; g.setLineDash([4, 4]); g.lineWidth = 1.5;
-  g.beginPath(); g.moveTo(0, sy(0)); g.lineTo(w, sy(0)); g.stroke(); g.setLineDash([]);
-  g.fillStyle = '#f4f1e6'; g.beginPath(); g.arc(sx(0), sy(-4), 4.5, 0, Math.PI * 2); g.fill();
-  def.recv.forEach((r, i) => {
-    const pts = [r.start, ...r.path]; const col = ROUTE_COLORS[i];
-    g.strokeStyle = col; g.lineWidth = 2.6; g.lineJoin = 'round'; g.lineCap = 'round';
-    g.beginPath(); pts.forEach((p, j) => (j ? g.lineTo(sx(p[0]), sy(p[1])) : g.moveTo(sx(p[0]), sy(p[1]))));
-    const a = pts[pts.length - 2] || pts[0], b = pts[pts.length - 1];
-    let dx = sx(b[0]) - sx(a[0]), dy = sy(b[1]) - sy(a[1]); const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
-    if (r.end !== 'settle' && pts.length > 1) {
-      const ex = sx(b[0]) + dx * 10, ey = sy(b[1]) + dy * 10; g.lineTo(ex, ey); g.stroke();
-      g.fillStyle = col; g.beginPath(); g.moveTo(ex + dx * 7, ey + dy * 7); g.lineTo(ex - dy * 5, ey + dx * 5); g.lineTo(ex + dy * 5, ey - dx * 5); g.fill();
-    } else {
-      g.stroke();
-      if (pts.length > 1) { g.beginPath(); g.moveTo(sx(b[0]) - dy * 6, sy(b[1]) + dx * 6); g.lineTo(sx(b[0]) + dy * 6, sy(b[1]) - dx * 6); g.stroke(); }
-    }
-    g.fillStyle = col; g.strokeStyle = '#0a1016'; g.lineWidth = 1.5;
-    g.beginPath(); g.arc(sx(r.start[0]), sy(r.start[1]), 5, 0, Math.PI * 2); g.fill(); g.stroke();
-  });
-}
-function renderCards() {
-  const wrap = $('cards'); wrap.innerHTML = '';
-  const dw = document.createElement('div'); dw.className = 'card-wrap';
-  dw.innerHTML = `<button class="card draw"><div class="sketch"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffcf3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l3.8-1 11-11-2.8-2.8-11 11L3 21z"/><path d="M14 6.2l2.8 2.8"/></svg></div><b>Draw a play</b><span>Your routes</span></button>`;
-  dw.firstChild.onclick = enterDraw; wrap.appendChild(dw);
-  if (G.down === 4 && !G.pat) {
-    const pw = document.createElement('div'); pw.className = 'card-wrap';
-    pw.innerHTML = `<button class="card draw"><div class="sketch"><svg width="48" height="44" viewBox="0 0 26 24" fill="none" stroke="#ffcf3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20C6 6 18 2 23 14"/><path d="M19 13l4 1 1-4"/></svg></div><b>Punt</b><span>Kick it away</span></button>`;
-    pw.firstChild.onclick = puntAway; wrap.appendChild(pw);
-  }
-  [...PLAYBOOK, ...customPlays].forEach((def, idx) => {
-    const cw = document.createElement('div'); cw.className = 'card-wrap';
-    const b = document.createElement('button'); b.className = 'card';
-    const cv = document.createElement('canvas'); drawDiagram(cv, def);
-    const name = document.createElement('b'); name.textContent = def.name;
-    const tag = document.createElement('span'); tag.textContent = def.tag || 'Custom';
-    b.append(cv, name, tag); b.onclick = () => selectPlay(def); cw.appendChild(b);
-    if (idx >= PLAYBOOK.length) {
-      const del = document.createElement('button'); del.className = 'card-del'; del.textContent = '×'; del.setAttribute('aria-label', `Delete ${def.name}`);
-      del.onclick = () => { customPlays.splice(idx - PLAYBOOK.length, 1); saveCustom(); renderCards(); toast(`Deleted ${def.name}`); };
-      cw.appendChild(del);
-    }
-    wrap.appendChild(cw);
-  });
-}
-
 // ---------- route drawing
 const draw = { formation: 'spread', paths: [[], [], []], active: -1 };
 function drawDef(fillEmpty = false) {
   const st = FORMATIONS[draw.formation].starts;
-  return { name: 'Custom', tag: 'Custom', recv: st.map((s, i) => ({ start: s, path: draw.paths[i].length || !fillEmpty ? draw.paths[i].map((p) => p.slice()) : [[s[0], s[1] + 5]], end: 'settle' })) };
+  return { name: 'Your play', custom: true, recv: st.map((s, i) => ({ start: s, path: draw.paths[i].length || !fillEmpty ? draw.paths[i].map((p) => p.slice()) : [[s[0], s[1] + 5]], end: 'settle' })) };
 }
 function enterDraw() {
-  hideAllBars(); G.phase = 'draw';
-  $('drawbar').hidden = false; renderChips();
+  if (G.drive.drawUsed || G.phase !== 'presnap') return;
+  hideAllBars(); G.phase = 'draw'; updateHUD();
+  $('drawbar').hidden = false; renderChips(); renderSaved();
   refreshDraw(); snapCamera();
 }
 function refreshDraw() {
@@ -1132,6 +1263,17 @@ function renderChips() {
       draw.formation = key; renderChips(); refreshDraw();
     };
     wrap.appendChild(b);
+  });
+}
+function renderSaved() {
+  const wrap = $('savedChips'); wrap.innerHTML = '';
+  customPlays.forEach((c, idx) => {
+    const box = document.createElement('span'); box.className = 'saved';
+    const load = document.createElement('button'); load.textContent = c.name; load.title = `Load ${c.name}`;
+    load.onclick = () => { draw.formation = c.formation; draw.paths = c.paths.map((p) => p.map((q) => q.slice())); renderChips(); refreshDraw(); toast(`Loaded ${c.name}`); };
+    const del = document.createElement('button'); del.textContent = '×'; del.setAttribute('aria-label', `Delete ${c.name}`);
+    del.onclick = () => { customPlays.splice(idx, 1); saveCustom(); renderSaved(); toast(`Deleted ${c.name}`); };
+    box.append(load, del); wrap.appendChild(box);
   });
 }
 const raycaster = new THREE.Raycaster(), ndc = new THREE.Vector2(), groundPlane = new THREE.Plane(V(0, 1, 0), 0);
@@ -1161,17 +1303,18 @@ function drawEnd() {
   if (draw.paths[draw.active].length < 2) draw.paths[draw.active] = [];
   draw.active = -1; refreshDraw();
 }
-$('dBack').onclick = () => toPlaycall();
+$('dBack').onclick = () => showSnap(G.play);
 $('dClear').onclick = () => { draw.paths = [[], [], []]; refreshDraw(); };
-$('dRun').onclick = () => { if (draw.paths.every((p) => !p.length)) { toast('Draw at least one route first'); return; } selectPlay(drawDef(true)); };
 $('dSave').onclick = () => {
   if (draw.paths.every((p) => !p.length)) { toast('Draw at least one route first'); return; }
   let n = 1; while (customPlays.some((c) => c.name === `My Play ${n}`)) n++;
-  const def = drawDef(true); def.name = `My Play ${n}`;
-  customPlays.push(def); saveCustom(); toast(`Saved as ${def.name}`);
+  customPlays.push({ name: `My Play ${n}`, formation: draw.formation, paths: draw.paths.map((p) => p.map((q) => q.slice())) });
+  saveCustom(); renderSaved(); toast(`Saved as My Play ${n}`);
 };
+$('dRun').onclick = () => { if (draw.paths.every((p) => !p.length)) { toast('Draw at least one route first'); return; } G.drive.drawUsed = true; G.play = drawDef(true); showSnap(G.play); };
 $('btnHike').onclick = (e) => { e.currentTarget.blur(); hike(); };
-$('btnChange').onclick = () => toPlaycall();
+$('btnDraw').onclick = (e) => { e.currentTarget.blur(); enterDraw(); };
+$('btnPunt').onclick = (e) => { e.currentTarget.blur(); if (G.phase === 'presnap') puntAway(); };
 $('juke').onclick = (e) => { e.currentTarget.blur(); juke(); };
 
 // ---------- pointer & keys
@@ -1272,11 +1415,13 @@ function frame(now) {
   if (P && P.throwAnim > 0) { P.throwAnim -= dt; qb.armOverride = P.throwAnim > 0 ? 2.6 - (1 - P.throwAnim / 0.28) * 3.8 : null; }
   everyone.forEach((e) => animateEntity(e, dt, time));
   placeHeldBall();
+  ruleSpot();
   const ctrl = G.phase === 'live' ? (P.ball === 'qb' ? qb : P.ball === 'carried' ? P.carrier : null) : null;
   ctrlRing.visible = !!ctrl;
   if (ctrl) { ctrlRing.position.set(ctrl.pos.x, 0.05, ctrl.pos.z); ctrlRing.scale.setScalar(1 + Math.sin(time * 6) * 0.06); }
   updateCamera(dt);
   renderer.render(scene, camera);
+  updateFire(dt);
   requestAnimationFrame(frame);
 }
 
@@ -1284,16 +1429,17 @@ function frame(now) {
 async function boot() {
   await Promise.race([document.fonts.load('48px Bungee'), new Promise((r) => setTimeout(r, 1500))]).catch(() => {});
   buildWorld(); resize();
-  setBlueBall(10); lineUp(PLAYBOOK[0]); clearRoutes(); updateHUD(); snapCamera();
+  resetGame(); G.play = randomPlay(); lineUp(G.play); clearRoutes(); updateHUD(); snapCamera();
   $('loading').hidden = true;
   requestAnimationFrame(frame);
   await showModal(`<div class="eyebrow">Blue vs Red · 4 on 4</div><h1>Backyard Blitz</h1>
-    <p>Sandlot rules: four downs to make ten yards, no field goals, and one rusher who counts three Mississippi before coming after you. Stuck on 4th down? Go for it or punt it away.</p>
+    <p>Sandlot rules: four downs to reach midfield for your only first down, then four more to score. No field goals. Stuck on 4th down? Go for it or punt it away.</p>
     <dl class="controls">
-      <dt>Call it</dt><dd>Pick a play from the book or draw your own routes.</dd>
+      <dt>Huddle</dt><dd>Every snap is a real play from the book, picked at random, and nobody tells you which one. Read it after the snap. Once per drive you can draw up your own play.</dd>
+      <dt>Defense</dt><dd>Red gets one rush per drive: three Mississippi, then he comes. Every other snap that man plays safety, and you have five Mississippi to throw.</dd>
       <dt>Hike</dt><dd><kbd>Space</kbd> or the HIKE button.</dd>
       <dt>Throw</dt><dd>Press anywhere and pull back like a slingshot. Pull farther to throw deeper, then let go. Lead your receiver.</dd>
-      <dt>QB</dt><dd><kbd>WASD</kbd> or arrows move in the pocket. Cross the line and you are a runner.</dd>
+      <dt>QB</dt><dd><kbd>WASD</kbd> or arrows move in the pocket. You can only run once you're rushed: after the rusher's three Mississippi, cross the line and you're a runner.</dd>
       <dt>Run</dt><dd>Steer with <kbd>WASD</kbd> or arrows (on touch, hold left or right of the runner). <kbd>Space</kbd> or JUKE to shake a tackler.</dd>
     </dl>`, [{ label: 'Play ball', value: 1, primary: true }]);
   toPlaycall('Kickoff');
